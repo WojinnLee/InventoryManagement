@@ -1,0 +1,43 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum StockLogType {
+  IMPORT
+  EXPORT
+}
+
+enum ItemStatus {
+  active
+  inactive
+}
+
+model Item {
+  id          Int        @id @default(autoincrement())
+  name        String
+  sku         String     @unique
+  description String?
+  quantity    Int        @default(0)
+  unit        String
+  status      ItemStatus @default(active)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  stockLogs   StockLog[]
+}
+
+model StockLog {
+  id        Int          @id @default(autoincrement())
+  itemId    Int
+  type      StockLogType
+  quantity  Int
+  note      String?
+  createdAt DateTime     @default(now())
+  item      Item         @relation(fields: [itemId], references: [id], onDelete: Cascade)
+
+  @@index([itemId])
+}
