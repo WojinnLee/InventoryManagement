@@ -112,7 +112,27 @@ async function exportStock(req, res) {
   });
 }
 
+async function getStockLogs(req, res) {
+  const logs = await prisma.stockLog.findMany({
+    include: {
+      item: {
+        select: {
+          name: true,
+          sku: true,
+        },
+      },
+    },
+    orderBy: { createdAt: "desc" },
+  });
+
+  res.status(200).json({
+    ok: true,
+    data: logs,
+  });
+}
+
 module.exports = {
   exportStock,
   importStock,
+  getStockLogs,
 };
