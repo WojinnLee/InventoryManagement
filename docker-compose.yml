@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: ez_inventory_db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: ez_inventory
+    ports:
+      - "5433:5432"
+    volumes:
+      - ez_inventory_data:/var/lib/postgresql/data
+
+volumes:
+  ez_inventory_data:

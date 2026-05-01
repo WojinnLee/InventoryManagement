@@ -1,0 +1,38 @@
+{
+  "name": "ez-inventory-backend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Backend API for EZ-Inventory",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js",
+    "lint": "eslint src/",
+    "lint:fix": "eslint src/ --fix",
+    "test": "jest --testEnvironment node --forceExit",
+    "db:seed": "node scripts/seed.js",
+    "db:view": "node scripts/db-view.js",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:reset": "prisma migrate reset --force"
+  },
+  "jest": {
+    "testMatch": ["**/tests/**/*.test.js"],
+    "testEnvironment": "node"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.16.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.0.0",
+    "eslint": "^9.0.0",
+    "globals": "^15.0.0",
+    "jest": "^29.0.0",
+    "nodemon": "^3.1.10",
+    "prisma": "^6.16.0",
+    "supertest": "^7.0.0"
+  }
+}
