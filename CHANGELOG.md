@@ -4,7 +4,29 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [Unreleased] — 2026-05-01
+
+### Added
+
+**CI/CD (DevOps)**
+- `.github/workflows/ci.yml` — GitHub Actions pipeline chạy tự động khi push và pull request vào `main`/`dev`
+  - Job `backend-ci`: install → lint → test → build check
+  - Job `frontend-ci`: install → lint → build (dùng `--if-present` cho đến khi frontend hoàn chỉnh)
+  - Cache `~/.npm` để tăng tốc pipeline
+- `backend/eslint.config.js` — ESLint flat config cho Node.js CommonJS, rule `no-unused-vars`, `no-undef`
+- `backend/tests/health.test.js` — Jest + Supertest test kiểm tra `GET /api/health` trả `200 { ok: true }`
+- `docs/git-workflow.md` — Quy tắc branch, commit convention, hướng dẫn Pull Request cho cả nhóm
+
+### Changed
+
+- `backend/package.json` — thêm scripts `lint`, `lint:fix`, `test`; thêm devDependencies `eslint`, `@eslint/js`, `globals`, `jest`, `supertest`
+- `backend/src/middlewares/error-handler.js` — đổi tham số `next` thành `_next` để đúng ESLint rule `argsIgnorePattern: ^_`
+- `backend/src/controllers/stock-logs-controller.js` — bỏ import `Prisma` không dùng
+
+---
+
 ## [Unreleased] — 2026-04-30
+
 
 ### Added
 
