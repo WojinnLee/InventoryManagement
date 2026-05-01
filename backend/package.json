@@ -7,9 +7,11 @@
   "scripts": {
     "dev": "nodemon src/server.js",
     "start": "node src/server.js",
+    "db:seed": "node scripts/seed.js",
     "db:view": "node scripts/db-view.js",
     "prisma:generate": "prisma generate",
-    "prisma:migrate": "prisma migrate dev"
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:reset": "prisma migrate reset --force"
   },
   "dependencies": {
     "@prisma/client": "^6.16.0",
