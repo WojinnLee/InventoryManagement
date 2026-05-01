@@ -1,4 +1,4 @@
-const { Prisma } = require("@prisma/client");
+// Prisma client instance is used via prisma (lib/prisma), not the Prisma namespace
 
 const AppError = require("../utils/app-error");
 const prisma = require("../lib/prisma");
