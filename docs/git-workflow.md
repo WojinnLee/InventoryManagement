@@ -1,3 +1,4 @@
+
 # Quy tắc Branch và Commit — EZ-Inventory
 
 ## 1. Cấu trúc Branch
