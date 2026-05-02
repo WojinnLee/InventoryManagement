@@ -1,206 +1,163 @@
 # EZ-Inventory
 
-Hệ thống quản lý kho hàng đơn giản — Backend REST API (Node.js + Express + PostgreSQL) với CI/CD tự động qua GitHub Actions.
+EZ-Inventory là project quản lý kho full-stack gồm frontend quản trị, backend REST API và cơ sở dữ liệu PostgreSQL. Project được xây dựng để thực hành phát triển ứng dụng web kết hợp với quy trình DevOps cơ bản.
 
 ![CI](https://github.com/WojinnLee/InventoryManagement/actions/workflows/ci.yml/badge.svg)
 
----
+## Giới thiệu
 
-## Tech Stack
+Project tập trung vào các chức năng chính:
+- quản lý sản phẩm trong kho
+- nhập kho và xuất kho
+- theo dõi tồn kho hiện tại
+- xem lịch sử giao dịch nhập/xuất
 
-| Tầng | Công nghệ |
-|------|-----------|
-| Backend API | Node.js 20 + Express 5 |
+Ngoài phần chức năng, project cũng có:
+- database chạy local bằng Docker Compose
+- migration và seed dữ liệu bằng Prisma
+- CI pipeline bằng GitHub Actions
+
+## Công nghệ sử dụng
+
+| Thành phần | Công nghệ |
+|---|---|
+| Frontend | React 19, Vite 8, React Router 7, Tailwind CSS 4 |
+| Backend | Node.js 20, Express 5 |
 | ORM | Prisma 6 |
-| Database | PostgreSQL 16 (Docker) |
-| Lint | ESLint 9 (flat config) |
-| Test | Jest + Supertest |
+| Database | PostgreSQL 16 |
+| Kiểm thử | Jest, Supertest |
 | CI/CD | GitHub Actions |
 
----
+## Chức năng đã làm
 
-## Cấu trúc dự án
+### Frontend
+- Dashboard tổng quan tồn kho và giao dịch gần đây
+- Quản lý sản phẩm: thêm, sửa, xóa, tìm kiếm, lọc trạng thái
+- Nhập kho
+- Xuất kho
+- Lịch sử giao dịch nhập/xuất
+- Giao diện quản trị với sidebar, header và nhiều trang
 
-```
+### Backend
+- `GET /api/health`
+- CRUD sản phẩm qua `GET/POST/PUT/DELETE /api/items`
+- `GET /api/inventory`
+- `GET /api/stock-logs`
+- `POST /api/stock-logs/in`
+- `POST /api/stock-logs/out`
+- Seed dữ liệu mẫu để test nhanh
+
+## Cấu trúc project
+
+```text
 InventoryManagement/
-├── .github/
-│   └── workflows/
-│       └── ci.yml          # GitHub Actions CI pipeline
-├── backend/                # REST API (Express + Prisma + PostgreSQL)
-│   ├── eslint.config.js    # ESLint config
-│   ├── tests/              # Jest test suite
-│   └── src/
-│       ├── controllers/
-│       ├── routes/
-│       ├── middlewares/
-│       └── lib/
-├── frontend/               # Giao diện (đang phát triển)
-├── docs/                   # Tài liệu dự án
-│   ├── api.md
-│   ├── architecture.md
-│   ├── git-workflow.md
-│   ├── deployment.md
-│   └── incidents.md
-├── docker-compose.yml      # PostgreSQL container
+├── .github/workflows/
+├── backend/
+├── frontend/
+├── docs/
+├── docker-compose.yml
 ├── CHANGELOG.md
 └── README.md
 ```
 
----
+## Yêu cầu môi trường
 
-## Chạy Backend Local
+- Node.js 20+
+- npm 10+
+- Docker Desktop
 
-### Bước 1 — Khởi động database bằng Docker
+## Hướng dẫn chạy project
+
+### 1. Chạy database
 
 ```bash
 docker compose up -d
 ```
 
-> Container postgres chạy ở port `5433` (để tránh xung đột với postgres local nếu có).
+PostgreSQL chạy ở `localhost:5433`.
 
-### Bước 2 — Cài đặt dependencies
+### 2. Chạy backend
 
 ```bash
 cd backend
 npm install
+cp .env.example .env
+npm run prisma:generate
+npm run prisma:migrate
+npm run db:seed
+npm run dev
 ```
 
-### Bước 3 — Cấu hình môi trường
+Backend chạy tại `http://localhost:5000`.
 
-Copy file `.env.example` thành `.env`:
-
-```bash
-cp backend/.env.example backend/.env
-```
-
-Nội dung `.env` mặc định:
+Biến môi trường mẫu:
 
 ```env
 PORT=5000
-DATABASE_URL="postgresql://postgres:postgres@localhost:5433/ez_inventory"
+DATABASE_URL=postgresql://postgres:postgres@localhost:5433/ez_inventory
 FRONTEND_URL=http://localhost:5173
 NODE_ENV=development
 ```
 
-### Bước 4 — Chạy migration (tạo bảng trong DB)
+### 3. Chạy frontend
 
 ```bash
-cd backend
-npm run prisma:migrate
-```
-
-### Bước 5 — Seed dữ liệu demo
-
-```bash
-cd backend
-npm run db:seed
-```
-
-Seed sẽ tạo **5 sản phẩm mẫu** và **12 log nhập/xuất kho**.  
-⚠️ **Lưu ý:** seed xóa toàn bộ data cũ trước khi chạy.
-
-### Bước 6 — Khởi động server
-
-```bash
-cd backend
+cd frontend
+npm install
+cp .env.example .env
 npm run dev
 ```
 
-Server chạy tại `http://localhost:5000`.
+Frontend mặc định chạy tại `http://localhost:5173`.
 
----
+Biến môi trường mẫu:
 
-## Scripts Backend
+```env
+VITE_API_URL=http://localhost:5000
+```
 
-| Script | Mô tả |
-|--------|-------|
-| `npm run dev` | Chạy dev server với nodemon (auto-restart) |
-| `npm run start` | Chạy production server |
-| `npm run lint` | Kiểm tra lỗi ESLint |
-| `npm run lint:fix` | Tự động sửa lỗi ESLint |
-| `npm test` | Chạy Jest test suite |
-| `npm run db:seed` | Seed dữ liệu demo vào database |
-| `npm run db:view` | Xem nhanh danh sách items trong DB |
-| `npm run prisma:migrate` | Chạy migration (tạo/cập nhật bảng) |
-| `npm run prisma:generate` | Regenerate Prisma Client |
-| `npm run prisma:reset` | Reset toàn bộ database và chạy lại migration |
+## Các trang chính của frontend
 
----
+- `/` — Dashboard
+- `/products` — Quản lý sản phẩm
+- `/stock-in` — Nhập kho
+- `/stock-out` — Xuất kho
+- `/transactions` — Lịch sử giao dịch
+- `/settings` — Trang placeholder
 
-## API Endpoints
+## Luồng test nhanh
+
+Sau khi chạy backend và frontend, có thể kiểm tra nhanh theo thứ tự:
+
+1. Mở dashboard để kiểm tra hệ thống hoạt động
+2. Tạo một sản phẩm mới ở trang `Products`
+3. Thực hiện nhập kho ở `Stock In`
+4. Thực hiện xuất kho ở `Stock Out`
+5. Kiểm tra lịch sử giao dịch ở `Transactions`
+
+## API chính
 
 | Method | Route | Mô tả |
-|--------|-------|-------|
-| `GET` | `/api/health` | Kiểm tra server |
-| `GET` | `/api/items` | Danh sách sản phẩm |
+|---|---|---|
+| `GET` | `/api/health` | Kiểm tra trạng thái server |
+| `GET` | `/api/items` | Lấy danh sách sản phẩm |
 | `POST` | `/api/items` | Tạo sản phẩm mới |
 | `PUT` | `/api/items/:id` | Cập nhật sản phẩm |
 | `DELETE` | `/api/items/:id` | Xóa sản phẩm |
-| `GET` | `/api/inventory` | Tồn kho hiện tại |
-| `GET` | `/api/stock-logs` | Lịch sử giao dịch kho |
+| `GET` | `/api/inventory` | Lấy tồn kho hiện tại |
+| `GET` | `/api/stock-logs` | Lấy lịch sử giao dịch |
 | `POST` | `/api/stock-logs/in` | Nhập kho |
 | `POST` | `/api/stock-logs/out` | Xuất kho |
 
-Xem chi tiết request/response tại [`docs/api.md`](docs/api.md).
+Chi tiết xem tại `docs/api.md`.
 
----
-
-## Test nhanh bằng curl
-
-```bash
-# Health check
-curl http://localhost:5000/api/health
-
-# Danh sách sản phẩm
-curl http://localhost:5000/api/items
-
-# Tồn kho hiện tại
-curl http://localhost:5000/api/inventory
-
-# Lịch sử giao dịch
-curl http://localhost:5000/api/stock-logs
-
-# Tạo sản phẩm mới
-curl -X POST http://localhost:5000/api/items -H "Content-Type: application/json" -d '{"name":"Test Item","sku":"TEST-001","unit":"cai","quantity":10}'
-
-# Nhập kho
-curl -X POST http://localhost:5000/api/stock-logs/in -H "Content-Type: application/json" -d '{"itemId":1,"quantity":50,"note":"Nhap hang dot 1"}'
-
-# Xuất kho
-curl -X POST http://localhost:5000/api/stock-logs/out -H "Content-Type: application/json" -d '{"itemId":1,"quantity":10,"note":"Xuat cho phong Hanh Chinh"}'
-```
-
----
-
-## CI/CD
-
-Pipeline GitHub Actions chạy tự động khi:
-- Push lên `main`, `dev`, `feature/**`
-- Tạo Pull Request vào `main` hoặc `dev`
-
-**Các bước pipeline:**
-
-```
-install → lint → test → build check
-```
-
-Xem chi tiết tại [`.github/workflows/ci.yml`](.github/workflows/ci.yml).
-
----
-
-## Quy tắc Git
-
-Xem hướng dẫn branch, commit convention và quy trình Pull Request tại [`docs/git-workflow.md`](docs/git-workflow.md).
-
----
-
-## Tài liệu
+## Tài liệu tham khảo
 
 | File | Nội dung |
-|------|---------|
-| [`docs/api.md`](docs/api.md) | Chi tiết tất cả API endpoints |
-| [`docs/architecture.md`](docs/architecture.md) | Kiến trúc hệ thống, database schema |
-| [`docs/git-workflow.md`](docs/git-workflow.md) | Quy tắc branch và commit |
-| [`docs/deployment.md`](docs/deployment.md) | Hướng dẫn deploy |
-| [`docs/incidents.md`](docs/incidents.md) | Danh sách incident và cách xử lý |
-| [`CHANGELOG.md`](CHANGELOG.md) | Lịch sử thay đổi |
+|---|---|
+| `docs/api.md` | Tài liệu API |
+| `docs/architecture.md` | Kiến trúc backend |
+| `docs/git-workflow.md` | Quy ước branch và commit |
+| `docs/deployment.md` | Hướng dẫn deploy |
+| `docs/incidents.md` | Ghi chú sự cố và cách xử lý |
+| `CHANGELOG.md` | Lịch sử thay đổi |
