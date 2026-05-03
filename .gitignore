@@ -4,6 +4,10 @@ build
 .env
 .env.local
 .env.production
+.agents/
+.claude/
+.continue/
+skills-lock.json
 .DS_Store
 npm-debug.log
 yarn-error.log
