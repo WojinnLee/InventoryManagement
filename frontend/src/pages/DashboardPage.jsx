@@ -211,7 +211,7 @@ export default function DashboardPage() {
             <span className="status-badge__dot" />
             {health === 'online' ? 'Hệ thống hoạt động' : 'Mất kết nối'}
           </span>
-          <span className="text-caption">API: localhost:5000</span>
+          <span className="text-caption">API: {import.meta.env.VITE_API_URL || 'http://localhost:5000'}</span>
         </div>
         <button className="btn btn--secondary btn--sm" onClick={fetchData}>
           <RefreshCw size={14} /> Làm mới

@@ -122,7 +122,7 @@ VITE_API_URL=http://localhost:5000
 - `/products` — Quản lý sản phẩm
 - `/stock-in` — Nhập kho
 - `/stock-out` — Xuất kho
-- `/transactions` — Lịch sử giao dịch
+- `/transactions` — Lịch sử kho
 - `/settings` — Trang placeholder
 
 ## Luồng test nhanh
@@ -155,9 +155,14 @@ Chi tiết xem tại `docs/api.md`.
 
 | File | Nội dung |
 |---|---|
-| `docs/api.md` | Tài liệu API |
-| `docs/architecture.md` | Kiến trúc backend |
-| `docs/git-workflow.md` | Quy ước branch và commit |
-| `docs/deployment.md` | Hướng dẫn deploy |
-| `docs/incidents.md` | Ghi chú sự cố và cách xử lý |
+| `docs/README.md` | Index toàn bộ tài liệu |
+| `docs/frontend/frontend-overview.md` | Tổng quan frontend |
+| `docs/frontend/frontend-todo.md` | Danh sách việc cần hoàn thiện frontend |
+| `docs/backend/api.md` | Tài liệu API chi tiết |
+| `docs/backend/architecture.md` | Kiến trúc backend |
+| `docs/devops/git-workflow.md` | Quy ước branch và commit |
+| `docs/devops/deployment.md` | Hướng dẫn deploy |
+| `docs/qa/test-plan.md` | Test cases và checklist |
+| `docs/qa/incidents.md` | Ghi chú sự cố và cách xử lý |
+| `docs/project/task-planning.docx` | Phân chia nhiệm vụ (tài liệu gốc) |
 | `CHANGELOG.md` | Lịch sử thay đổi |

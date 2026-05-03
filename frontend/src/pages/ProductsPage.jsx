@@ -222,7 +222,7 @@ export default function ProductsPage() {
           <div className="modal modal--sm" onClick={(e) => e.stopPropagation()}>
             <div className="modal__icon modal__icon--danger"><Trash2 size={24} /></div>
             <h3 className="modal__title">Xóa sản phẩm?</h3>
-            <p className="modal__desc">Xóa "{deleteConfirm.name}" và toàn bộ lịch sử giao dịch liên quan. Hành động này không thể hoàn tác.</p>
+            <p className="modal__desc">Xóa "{deleteConfirm.name}" và toàn bộ lịch sử kho liên quan. Hành động này không thể hoàn tác.</p>
             <div className="modal__actions">
               <button className="btn btn--secondary" onClick={() => setDeleteConfirm(null)}>Hủy</button>
               <button className="btn btn--danger" onClick={() => handleDelete(deleteConfirm.id)}>Xóa</button>

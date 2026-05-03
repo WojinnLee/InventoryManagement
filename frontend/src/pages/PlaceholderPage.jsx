@@ -10,7 +10,7 @@ const PAGES = {
   products: { icon: Package, title: 'Sản phẩm', desc: 'Quản lý danh sách sản phẩm, mã SKU và phân loại.' },
   'stock-in': { icon: ArrowDownToLine, title: 'Nhập kho', desc: 'Tạo phiếu nhập và cập nhật tồn kho.' },
   'stock-out': { icon: ArrowUpFromLine, title: 'Xuất kho', desc: 'Tạo đơn xuất kho và kiểm tra tồn.' },
-  transactions: { icon: ClipboardList, title: 'Lịch sử giao dịch', desc: 'Xem toàn bộ lịch sử nhập/xuất kho.' },
+  transactions: { icon: ClipboardList, title: 'Lịch sử kho', desc: 'Xem toàn bộ lịch sử nhập/xuất kho.' },
   settings: { icon: Settings, title: 'Cài đặt', desc: 'Cấu hình hệ thống và tài khoản.' },
 };
 
