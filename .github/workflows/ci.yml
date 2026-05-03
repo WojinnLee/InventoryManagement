@@ -43,7 +43,7 @@ jobs:
           DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/ez_inventory_test"
           PORT: "5000"
           NODE_ENV: "test"
-          FRONTEND_URL: "*"
+          FRONTEND_URL: "http://localhost:5173"
         run: npm test
 
       - name: Build backend (smoke check)
@@ -52,7 +52,7 @@ jobs:
           DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/ez_inventory_test"
           PORT: "5000"
           NODE_ENV: "test"
-          FRONTEND_URL: "*"
+          FRONTEND_URL: "http://localhost:5173"
 
   # ─── Frontend CI ──────────────────────────────────────────────────────────────
   frontend-ci:

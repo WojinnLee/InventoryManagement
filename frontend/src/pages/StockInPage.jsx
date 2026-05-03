@@ -36,7 +36,7 @@ export default function StockInPage() {
     setFormLoading(true);
     setFormError(null);
     try {
-      const res = await api.stockIn({ itemId: Number(formData.itemId), quantity: Number(formData.quantity), note: formData.note });
+      await api.stockIn({ itemId: Number(formData.itemId), quantity: Number(formData.quantity), note: formData.note });
       setToast({ msg: `Nhập ${formData.quantity} ${selectedItem?.unit || ''} "${selectedItem?.name}" thành công`, type: 'success' });
       setFormData({ itemId: '', quantity: '', note: '' });
       fetchData();
