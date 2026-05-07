@@ -8,6 +8,9 @@ RUN npm ci
 
 COPY . .
 
+# Copy prisma schema để generate
+COPY prisma ./prisma/
+
 RUN npx prisma generate
 
 EXPOSE 5000
