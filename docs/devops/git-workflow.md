@@ -95,7 +95,7 @@ Description:
 - [ ] API POST /api/items
 
 ## Test như thế nào?
-- curl http://localhost:5000/api/items
+- curl http://localhost:5050/api/items
 
 ## Checklist
 - [ ] CI pipeline pass

@@ -17,6 +17,7 @@
 | FE-08 | Transactions | View history of stock movements | All logs visible with correct timestamps | [ ] |
 | FE-09 | SRE | Console inspection | No red errors or leak warnings | [ ] |
 
+
 ## 2. API Test Checklist
 
 | ID | Endpoint | Method | Scenario | Expected Result | Status |

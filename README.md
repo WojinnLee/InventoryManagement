@@ -88,7 +88,7 @@ npm run db:seed
 npm run dev
 ```
 
-Backend chạy tại `http://localhost:5000`.
+Backend chạy tại `http://localhost:5050`.
 
 Biến môi trường mẫu:
 
@@ -113,7 +113,7 @@ Frontend mặc định chạy tại `http://localhost:5173`.
 Biến môi trường mẫu:
 
 ```env
-VITE_API_URL=http://localhost:5000
+VITE_API_URL=http://localhost:5050
 ```
 
 ## Các trang chính của frontend
