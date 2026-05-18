@@ -17,7 +17,7 @@ Frontend đã có đủ các trang và kết nối API cơ bản theo yêu cầu
 - **Cách fix**:
   ```bash
   # Tạo file frontend/.env.example
-  echo "VITE_API_URL=http://localhost:5000" > frontend/.env.example
+  echo "VITE_API_URL=http://localhost:5050" > frontend/.env.example
   git add frontend/.env.example
   git commit -m "chore: add frontend .env.example"
   ```
@@ -61,11 +61,11 @@ Frontend đã có đủ các trang và kết nối API cơ bản theo yêu cầu
 
 - **Vấn đề**: Nếu quên set env khi build production, URL hiển thị sẽ là `undefined/api/items`.
   - Đây chính là **INC04** trong tài liệu incident!
-- **Cách fix hiện tại**: `api.js` đã có fallback `|| 'http://localhost:5000'` nhưng `DashboardPage.jsx` hiển thị `import.meta.env.VITE_API_URL` trực tiếp có thể thấy `undefined`.
+- **Cách fix hiện tại**: `api.js` đã có fallback `|| 'http://localhost:5050'` nhưng `DashboardPage.jsx` hiển thị `import.meta.env.VITE_API_URL` trực tiếp có thể thấy `undefined`.
 - **Cách fix tốt hơn**: Hiển thị fallback URL thay vì biến env thô:
   ```jsx
   <span className="text-caption">
-    API: {import.meta.env.VITE_API_URL || 'http://localhost:5000'}
+    API: {import.meta.env.VITE_API_URL || 'http://localhost:5050'}
   </span>
   ```
 

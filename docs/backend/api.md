@@ -6,7 +6,7 @@ Tài liệu mô tả toàn bộ endpoint backend đã triển khai.
 
 | Môi trường | URL                      |
 |------------|--------------------------|
-| Local      | `http://localhost:5000`  |
+| Local      | `http://localhost:5050`  |
 | Prefix API | `/api`                   |
 
 ## Format Response chung
@@ -35,7 +35,7 @@ Kiểm tra backend có chạy hay không.
 ```
 
 ```bash
-curl http://localhost:5000/api/health
+curl http://localhost:5050/api/health
 ```
 
 ---
@@ -67,7 +67,7 @@ Lấy danh sách tất cả sản phẩm, mới nhất lên đầu.
 ```
 
 ```bash
-curl http://localhost:5000/api/items
+curl http://localhost:5050/api/items
 ```
 
 ---
@@ -122,7 +122,7 @@ Tạo sản phẩm mới.
 | `409` | `sku` đã tồn tại |
 
 ```bash
-curl -X POST http://localhost:5000/api/items \
+curl -X POST http://localhost:5050/api/items \
   -H "Content-Type: application/json" \
   -d '{"name":"Bút bi Thiên Long","sku":"BTL-001","unit":"cái","quantity":100}'
 ```
@@ -171,7 +171,7 @@ Cập nhật thông tin sản phẩm. Tất cả các trường trong body đề
 | `409` | `sku` mới bị trùng với sản phẩm khác |
 
 ```bash
-curl -X PUT http://localhost:5000/api/items/1 \
+curl -X PUT http://localhost:5050/api/items/1 \
   -H "Content-Type: application/json" \
   -d '{"quantity":150}'
 ```
@@ -194,7 +194,7 @@ Xóa sản phẩm. Các stock log liên quan sẽ bị xóa theo (cascade).
 | `404` | Không tìm thấy sản phẩm |
 
 ```bash
-curl -X DELETE http://localhost:5000/api/items/1
+curl -X DELETE http://localhost:5050/api/items/1
 ```
 
 ---
@@ -224,7 +224,7 @@ Lấy snapshot tồn kho hiện tại của tất cả sản phẩm. Sắp xếp
 ```
 
 ```bash
-curl http://localhost:5000/api/inventory
+curl http://localhost:5050/api/inventory
 ```
 
 ---
@@ -273,7 +273,7 @@ Lấy toàn bộ lịch sử nhập/xuất kho, mới nhất lên đầu, kèm t
 ```
 
 ```bash
-curl http://localhost:5000/api/stock-logs
+curl http://localhost:5050/api/stock-logs
 ```
 
 ---
@@ -333,7 +333,7 @@ Nhập kho: tăng `quantity` của sản phẩm và ghi log `IMPORT`.
 | `404` | Không tìm thấy sản phẩm |
 
 ```bash
-curl -X POST http://localhost:5000/api/stock-logs/in \
+curl -X POST http://localhost:5050/api/stock-logs/in \
   -H "Content-Type: application/json" \
   -d '{"itemId":1,"quantity":50,"note":"Nhập hàng đợt 2"}'
 ```
@@ -365,7 +365,7 @@ Xuất kho: giảm `quantity` của sản phẩm và ghi log `EXPORT`.
 | `404` | Không tìm thấy sản phẩm |
 
 ```bash
-curl -X POST http://localhost:5000/api/stock-logs/out \
+curl -X POST http://localhost:5050/api/stock-logs/out \
   -H "Content-Type: application/json" \
   -d '{"itemId":1,"quantity":20,"note":"Xuất cho phòng Hành Chính"}'
 ```

@@ -72,7 +72,7 @@ frontend/
 
 | Biến | Mô tả | Ví dụ |
 |---|---|---|
-| `VITE_API_URL` | URL của backend API | `http://localhost:5000` |
+| `VITE_API_URL` | URL của backend API | `http://localhost:5050` |
 
 Xem file `.env.example` để biết giá trị mặc định.
 

@@ -43,23 +43,23 @@ Kiểm tra toàn bộ flow chính của hệ thống EZ-Inventory: từ frontend
 
 ```bash
 # Health
-curl http://localhost:5000/api/health
+curl http://localhost:5050/api/health
 
 # Lấy danh sách items
-curl http://localhost:5000/api/items
+curl http://localhost:5050/api/items
 
 # Tạo item mới
-curl -X POST http://localhost:5000/api/items \
+curl -X POST http://localhost:5050/api/items \
   -H "Content-Type: application/json" \
   -d '{"name":"Test SP","sku":"TEST-001","unit":"cái","quantity":50}'
 
 # Nhập kho
-curl -X POST http://localhost:5000/api/stock-logs/in \
+curl -X POST http://localhost:5050/api/stock-logs/in \
   -H "Content-Type: application/json" \
   -d '{"itemId":1,"quantity":10,"note":"Test nhập"}'
 
 # Xuất kho vượt tồn (phải lỗi 400)
-curl -X POST http://localhost:5000/api/stock-logs/out \
+curl -X POST http://localhost:5050/api/stock-logs/out \
   -H "Content-Type: application/json" \
   -d '{"itemId":1,"quantity":99999}'
 ```

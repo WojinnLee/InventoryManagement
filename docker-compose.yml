@@ -32,7 +32,7 @@ services:
       NODE_ENV: production
       FRONTEND_URL: http://localhost:5173
     ports:
-      - "5001:5000"
+      - "5050:5000"
     command: >
       sh -c "npx prisma migrate deploy && node src/server.js"
 
@@ -41,7 +41,7 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
       args:
-        VITE_API_URL: http://localhost:5000
+        VITE_API_URL: http://localhost:5050
     container_name: ez_inventory_frontend
     restart: always
     depends_on:
